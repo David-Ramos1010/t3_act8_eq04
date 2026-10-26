@@ -11,19 +11,51 @@ import SocialButton from "../components/login/SocialButton";
 import RegisterLink from "../components/login/RegisterLink";
 
 function LoginPage({ onLogin }) {
-    const [correo, setCorreo] = useState("");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [recordarme, setRecordarme] = useState(false);
     const [error, setError] = useState("");
+    const [cargando, setCargando] = useState(false);
 
-    function manejarSubmit(e) {
+    async function manejarSubmit(e) {
         e.preventDefault();
-        if (!correo.trim() || !password.trim()) {
+
+        if (!username.trim() || !password.trim()) {
             setError("Completa todos los campos");
             return;
         }
+
         setError("");
-        onLogin({ nombre: correo.split("@")[0], correo, recordarme });
+        setCargando(true);
+
+        try {
+            const res = await fetch("https://dummyjson.com/auth/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    username: username.trim(),
+                    password,
+                    expiresInMins: 60,
+                }),
+            });
+            const data = await res.json();
+
+            if (!res.ok || !data.accessToken) {
+                setError(data.message || "Usuario o contraseña incorrectos");
+                return;
+            }
+
+            onLogin({
+                nombre: data.firstName,
+                username: data.username,
+                token: data.accessToken,
+                recordarme,
+            });
+        } catch {
+            setError("Error de conexión. Intenta de nuevo.");
+        } finally {
+            setCargando(false);
+        }
     }
 
     return (
@@ -41,18 +73,18 @@ function LoginPage({ onLogin }) {
 
                     <div className="login-campos">
                         <InputField
-                            label="Correo electrónico"
-                            type="email"
-                            icon="mail"
-                            placeholder="ejemplo@gmail.com"
-                            value={correo}
-                            onChange={(e) => setCorreo(e.target.value)}
+                            label="Nombre de usuario"
+                            type="text"
+                            icon="user"
+                            placeholder="sophiab"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
                         />
                         <InputField
                             label="Contraseña"
                             type="password"
                             icon="lock"
-                            placeholder="● ● ● ● ● ●"
+                            placeholder="sophiabpass"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
@@ -65,7 +97,9 @@ function LoginPage({ onLogin }) {
 
                     {error && <p className="login-error">{error}</p>}
 
-                    <Button type="submit">Iniciar sesión</Button>
+                    <Button type="submit" disabled={cargando}>
+                        {cargando ? "Entrando..." : "Iniciar sesión"}
+                    </Button>
 
                     <Divider />
 
