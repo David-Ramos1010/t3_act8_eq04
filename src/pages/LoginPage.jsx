@@ -29,10 +29,10 @@ function LoginPage({ onLogin }) {
         setCargando(true);
 
         try {
-            const res = await fetch("https://dummyjson.com/auth/login", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
+            const res = await fetch("https://dummyjson.com/auth/login", { // Aquí nos comunicamos con esa ruta
+                method: "POST",//Metodo POST para insertar 
+                headers: { "Content-Type": "application/json" }, //se envian en formato JSON
+                body: JSON.stringify({//objeto de JavaScript con JSON
                     username: username.trim(),
                     password,
                     expiresInMins: 60,
