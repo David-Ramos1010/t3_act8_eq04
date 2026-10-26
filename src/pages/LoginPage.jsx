@@ -76,7 +76,7 @@ function LoginPage({ onLogin }) {
                             label="Nombre de usuario"
                             type="text"
                             icon="user"
-                            placeholder="sophiab"
+                            placeholder="jamesd"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                         />
@@ -84,7 +84,7 @@ function LoginPage({ onLogin }) {
                             label="Contraseña"
                             type="password"
                             icon="lock"
-                            placeholder="sophiabpass"
+                            placeholder="jamesdpass"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
