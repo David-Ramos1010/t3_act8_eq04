@@ -60,8 +60,14 @@ Para ingresar al sistema puedes utilizar las credenciales oficiales de DummyJSON
 
 ---
 
+##  Link al proyecto ya desplegado en el VPS
+
+http://194.163.143.215/t3_act8_eq04/
+
+---
+
 ##  Equipo de Desarrollo
 
 * **Actividad 8 - Equipo 04**
 * Alvaréz Mora Jordi Moisés 02
-* José Ramos David Efraén 19
+* José Ramos David Efraín 19
