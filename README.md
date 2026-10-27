@@ -56,7 +56,7 @@ Para ingresar al sistema puedes utilizar las credenciales oficiales de DummyJSON
 
 ##  Estructura del Proyecto
 
-![Estructura del Proyecto](/src/assets/images/Estructura.PNG)
+![Estructura del Proyecto](/src/assets/images/Estructura.png)
 
 ---
 
