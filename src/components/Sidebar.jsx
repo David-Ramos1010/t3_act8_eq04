@@ -5,6 +5,7 @@ import imgLogo from '../assets/images/img_logo.png';
 export default function Sidebar({ vistaActual, cambiarVista, cerrarSesion }) {
     const menuItems = [
         { id: 'citas', label: 'Citas' },
+        { id: 'productos', label: 'Productos (CRUD)' },
         { id: 'pacientes', label: 'Pacientes' },
         { id: 'odontologos', label: 'Odontologos' },
         { id: 'tratamientos', label: 'Tratamientos' }
