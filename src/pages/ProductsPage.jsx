@@ -54,10 +54,13 @@ export default function ProductsPage() {
         if (newSearch) params.set('search', newSearch);
         if (newCategory && newCategory !== 'Todas') params.set('category', newCategory);
 
-        const newRelativePathQuery = window.location.pathname + '?' + params.toString();
-        window.history.pushState(null, '', newRelativePathQuery);
+        const newUrl = window.location.pathname + '?' + params.toString();
+        const currentUrl = window.location.pathname + window.location.search;
+        if (newUrl !== currentUrl) {
+            window.history.pushState(null, '', newUrl);
+        }
     }, []);
-
+    
     // Cargar categorías al montar
     useEffect(() => {
         fetchCategories()
