@@ -8,16 +8,16 @@ import Navbar from "./components/Navbar";
 
 function App() {
     const [usuario, setUsuario] = useState(null);
-    const [vistaActual, setVistaActual] = useState("dashboard");
+    const [vistaActual, setVistaActual] = useState("citas");
 
     function iniciarSesion(datosUsuario) {
         setUsuario(datosUsuario);
-        setVistaActual("dashboard");
+        setVistaActual("citas");
     }
 
     function cerrarSesion() {
         setUsuario(null);
-        setVistaActual("dashboard");
+        setVistaActual("citas");
     }
 
     if (!usuario) {
@@ -26,17 +26,20 @@ function App() {
 
     return (
         <div className="app-layout">
-            <Sidebar vistaActual={vistaActual} cambiarVista={setVistaActual} />
+            <Sidebar 
+                vistaActual={vistaActual} 
+                cambiarVista={setVistaActual} 
+                cerrarSesion={cerrarSesion} 
+            />
 
             <div className="main-area">
                 <Navbar
                     usuario={usuario}
-                    titulo={vistaActual === "dashboard" ? "Panel principal" : "Gestión de Productos"}
-                    cerrarSesion={cerrarSesion}
+                    titulo={vistaActual === "productos" ? "Gestión de Productos" : "Gestión de Citas Odontológicas"}
                 />
 
                 <main className="contenido">
-                    {vistaActual === "dashboard" && <DashboardPage cambiarVista={setVistaActual} />}
+                    {vistaActual === "citas" && <DashboardPage cambiarVista={setVistaActual} />}
                     {vistaActual === "productos" && <ProductsPage />}
                 </main>
             </div>
